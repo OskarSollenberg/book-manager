@@ -1,0 +1,7 @@
+@BookManager.Api_HostAddress = http://localhost:5231
+
+### List all books
+GET {{BookManager.Api_HostAddress}}/api/books
+Accept: application/json
+
+###
