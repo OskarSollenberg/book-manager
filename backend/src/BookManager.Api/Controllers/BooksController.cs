@@ -32,7 +32,7 @@ public class BooksController(IBookRepository repository) : ControllerBase
 
         repository.Add(book);
 
-        return Created($"/api/books/{book.Id}", book);
+        return CreatedAtAction(nameof(GetById), new { id = book.Id }, book);
     }
 
     [HttpPut("{id}")]
