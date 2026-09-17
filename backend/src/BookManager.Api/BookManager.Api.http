@@ -1,7 +1,91 @@
-@BookManager.Api_HostAddress = http://localhost:5231
+@host = http://localhost:5231
+
+# Paste an id from the "List all books" response to run the requests that need an existing book.
+@bookId = 00000000-0000-0000-0000-000000000000
 
 ### List all books
-GET {{BookManager.Api_HostAddress}}/api/books
+GET {{host}}/api/books
 Accept: application/json
 
-###
+### Create a book
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Doktor Glas",
+  "author": "Hjalmar Söderberg",
+  "publishedDate": "1905-09-01"
+}
+
+### Missing required fields -> 400 with a message per field
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "publishedDate": "1905-09-01"
+}
+
+### Whitespace-only title -> 400, a blank title is still a missing title
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "title": "   ",
+  "author": "Hjalmar Söderberg"
+}
+
+### Author sent as a JSON number -> 400 from the type system, before validation runs
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": 2342324
+}
+
+### Update a book that does not exist -> 404
+PUT {{host}}/api/books/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "Doktor Glas",
+  "author": "Hjalmar Söderberg"
+}
+
+### Delete a book that does not exist -> 404
+DELETE {{host}}/api/books/00000000-0000-0000-0000-000000000000
+
+### Fetch a book that does not exist -> 404
+GET {{host}}/api/books/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Only a title, no author -> 400 on the author field alone
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Doktor Glas"
+}
+
+### Title longer than 200 characters -> 400
+POST {{host}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+  "author": "Karin Boye"
+}
+
+### Update an existing book with an empty title -> 400, validation runs on update too
+### Set @bookId above first.
+PUT {{host}}/api/books/{{bookId}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "Karin Boye"
+}
+
+### Delete the same book twice -> 204, then 404
+### Set @bookId above first, then send this twice.
+DELETE {{host}}/api/books/{{bookId}}
