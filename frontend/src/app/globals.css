@@ -1,26 +1,79 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
+/*
+  Design tokens. The raw values live on :root and are swapped by the
+  prefers-color-scheme block below, so components never need `dark:` variants —
+  every utility built from these resolves to the right value automatically.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --surface-alt: #f3f1ec;
+  --border: #e4e2dc;
+  --text: #211f1c;
+  --text-secondary: #6b6860;
+  --text-tertiary: #a19d93;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --accent: #2b4c7e;
+  --accent-hover: #1f3a61;
+  --accent-soft: rgba(43, 76, 126, 0.09);
+
+  --danger: #b23b3b;
+  --danger-strong: #a02f2f;
+  --danger-soft: #fcedef;
+  --danger-border: #f2c6c6;
+
+  --modal-shadow: 0 20px 50px -12px rgba(33, 31, 28, 0.35);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #17181a;
+    --surface: #1e1f22;
+    --surface-alt: #26272b;
+    --border: #35352f;
+    --text: #ecead4;
+    --text-secondary: #9b978d;
+    --text-tertiary: #716d63;
+
+    --accent: #86abdd;
+    --accent-hover: #a3c1e8;
+    --accent-soft: rgba(134, 171, 221, 0.14);
+
+    --danger: #e38080;
+    --danger-strong: #ec9999;
+    --danger-soft: rgba(225, 114, 114, 0.1);
+    --danger-border: rgba(225, 114, 114, 0.32);
+
+    --modal-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-danger: var(--danger);
+  --color-danger-strong: var(--danger-strong);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-border: var(--danger-border);
+
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+
+  --shadow-modal: var(--modal-shadow);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
