@@ -1,4 +1,5 @@
 using BookManager.Api.Repositories;
+using BookManager.Api.Services;
 
 const string FrontendCorsPolicy = "FrontendCorsPolicy";
 
@@ -6,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
+// Singleton: the in-memory store *is* the database, so it must outlive requests.
 builder.Services.AddSingleton<IBookRepository, InMemoryBookRepository>();
+builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddCors(options =>
@@ -16,6 +19,9 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader()
         .AllowAnyMethod());
 });
+
+
+
 
 var app = builder.Build();
 
