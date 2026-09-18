@@ -16,7 +16,7 @@ public class BooksController(IBookService service) : ControllerBase
     {
         var book = service.GetById(id);
 
-        return book is null ? BookNotFound(id) : Ok(book);
+        return book is null ? BookNotFound() : Ok(book);
     }
 
     [HttpPost]
@@ -29,15 +29,15 @@ public class BooksController(IBookService service) : ControllerBase
 
     [HttpPut("{id}")]
     public IActionResult Update(Guid id, BookInput input) =>
-        service.Update(id, input) ? NoContent() : BookNotFound(id);
+        service.Update(id, input) ? NoContent() : BookNotFound();
 
     [HttpDelete("{id}")]
     public IActionResult Delete(Guid id) =>
-        service.Delete(id) ? NoContent() : BookNotFound(id);
+        service.Delete(id) ? NoContent() : BookNotFound();
 
-    private ObjectResult BookNotFound(Guid id) =>
+    private ObjectResult BookNotFound() =>
         Problem(
             statusCode: StatusCodes.Status404NotFound,
-            title: "Boken hittades inte.",
-            detail: $"Det finns ingen bok med id {id}.");
+            title: "Den här boken hittades inte.",
+            detail: "Den här boken hittades inte. Den kan redan ha tagits bort — ladda om sidan för att se den aktuella listan.");
 }

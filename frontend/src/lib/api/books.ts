@@ -13,7 +13,7 @@ export class ApiError extends Error {
 
 const FALLBACK_MESSAGES: Record<number, string> = {
   400: "Ogiltig inmatning. Kontrollera fälten och försök igen.",
-  404: "Boken hittades inte. Den kan redan ha tagits bort.",
+  404: "Den här boken hittades inte. Den kan redan ha tagits bort.",
 };
 
 interface ProblemDetails {
@@ -32,7 +32,7 @@ async function readErrorMessage(response: Response): Promise<string> {
   const fieldErrors = Object.values(problem?.errors ?? {}).flat();
 
   return (
-    (fieldErrors.length > 0 ? fieldErrors.join(" ") : undefined) ??
+    (fieldErrors.length > 0 ? fieldErrors.join("\n") : undefined) ??
     problem?.detail ??
     FALLBACK_MESSAGES[response.status] ??
     `Något gick fel (${response.status}).`

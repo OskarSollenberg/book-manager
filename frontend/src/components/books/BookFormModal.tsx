@@ -16,17 +16,17 @@ interface BookFormModalProps {
   onCancel: () => void;
 }
 
-type Errors = Partial<Record<"title" | "author", string>>;
-
-/** Mirrors the backend rule: title and author are required, date is not. */
-function validate({ title, author }: BookInput): Errors {
-  const errors: Errors = {};
-
-  if (!title.trim()) errors.title = "Titel är obligatoriskt.";
-  if (!author.trim()) errors.author = "Författare är obligatoriskt.";
-
-  return errors;
-}
+// Client validation is off so empty fields reach the API (assignment).
+// Uncomment to mirror [NotBlank] in the form if this grows.
+//
+// type Errors = Partial<Record<"title" | "author", string>>;
+//
+// function validate({ title, author }: BookInput): Errors {
+//   const errors: Errors = {};
+//   if (!title.trim()) errors.title = "Titel är obligatoriskt.";
+//   if (!author.trim()) errors.author = "Författare är obligatoriskt.";
+//   return errors;
+// }
 
 export function BookFormModal({
   mode,
@@ -37,26 +37,22 @@ export function BookFormModal({
   onCancel,
 }: BookFormModalProps) {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState<Errors>({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  // const [errors, setErrors] = useState<Errors>({});
+  // const [hasSubmitted, setHasSubmitted] = useState(false);
 
   function setField<K extends keyof BookInput>(field: K, value: BookInput[K]) {
     const next = { ...values, [field]: value };
-
     setValues(next);
-    // Only re-validate live once they've tried to submit, so the form doesn't
-    // shout at someone who is still typing their first field.
-    if (hasSubmitted) setErrors(validate(next));
+    // if (hasSubmitted) setErrors(validate(next));
   }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    setHasSubmitted(true);
-
-    const nextErrors = validate(values);
-    setErrors(nextErrors);
-
-    if (Object.keys(nextErrors).length === 0) onSubmit(values);
+    // setHasSubmitted(true);
+    // const nextErrors = validate(values);
+    // setErrors(nextErrors);
+    // if (Object.keys(nextErrors).length === 0) onSubmit(values);
+    onSubmit(values);
   }
 
   return (
@@ -74,7 +70,7 @@ export function BookFormModal({
           autoFocus
           placeholder="t.ex. Doktor Glas"
           value={values.title}
-          error={errors.title}
+          // error={errors.title}
           onChange={(event) => setField("title", event.target.value)}
         />
 
@@ -84,7 +80,7 @@ export function BookFormModal({
           required
           placeholder="t.ex. Hjalmar Söderberg"
           value={values.author}
-          error={errors.author}
+          // error={errors.author}
           onChange={(event) => setField("author", event.target.value)}
         />
 
