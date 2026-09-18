@@ -30,9 +30,6 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod());
 });
 
-
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

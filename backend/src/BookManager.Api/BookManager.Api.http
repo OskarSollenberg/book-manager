@@ -67,7 +67,8 @@ Content-Type: application/json
   "title": "Doktor Glas"
 }
 
-### Title longer than 200 characters -> 400
+### Long title is accepted — we only require a non-blank title, no max length
+### Expect 201, not 400.
 POST {{host}}/api/books
 Content-Type: application/json
 
