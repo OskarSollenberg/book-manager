@@ -51,6 +51,6 @@ public class BooksControllerTests
         var problem = Assert.IsType<ProblemDetails>(objectResult.Value);
 
         Assert.Equal(StatusCodes.Status404NotFound, problem.Status);
-        Assert.Equal("Den här boken hittades inte.", problem.Title);
+        Assert.Equal("This book was not found.", problem.Title);
     }
 }

@@ -9,10 +9,10 @@ namespace BookManager.Api.Models;
 /// </summary>
 public record BookInput
 {
-    [NotBlank(ErrorMessage = "Titel är obligatoriskt.")]
-    public string Title { get; init; } = string.Empty;
+        [NotBlank(ErrorMessage = "Title is required.")]
+        public string Title { get; init; } = string.Empty;
 
-    [NotBlank(ErrorMessage = "Författare är obligatoriskt.")]
+        [NotBlank(ErrorMessage = "Author is required.")]
     public string Author { get; init; } = string.Empty;
 
     public DateOnly? PublishedDate { get; init; }

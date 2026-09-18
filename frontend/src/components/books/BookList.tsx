@@ -6,7 +6,7 @@ interface BookListProps {
   onDelete: (book: Book) => void;
 }
 
-const dateFormatter = new Intl.DateTimeFormat("sv-SE", {
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -22,9 +22,9 @@ function formatDate(value: string | null) {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed border-border px-6 py-14 text-center">
-      <p className="font-serif text-base font-semibold">Inga böcker ännu</p>
+      <p className="font-serif text-base font-semibold">No books yet</p>
       <p className="max-w-xs text-sm text-text-secondary">
-        Lägg till din första bok med knappen ovan för att komma igång.
+        Add your first book with the button above to get started.
       </p>
     </div>
   );
@@ -45,9 +45,9 @@ export function BookList({ books, onEdit, onDelete }: BookListProps) {
         aria-hidden
         className="hidden items-center gap-4 border-b border-border bg-surface-alt px-5 py-3 text-xs font-medium uppercase tracking-wide text-text-secondary sm:flex"
       >
-        <span className="flex-1">Titel</span>
-        <span className="flex-1">Författare</span>
-        <span className="w-40">Publicerad</span>
+        <span className="flex-1">Title</span>
+        <span className="flex-1">Author</span>
+        <span className="w-40">Published</span>
         <span className="w-40" />
       </li>
 
@@ -74,14 +74,14 @@ export function BookList({ books, onEdit, onDelete }: BookListProps) {
               onClick={() => onEdit(book)}
               className="rounded-lg border border-border px-2.5 py-1.5 text-sm font-medium text-accent transition hover:bg-accent-soft sm:border-0"
             >
-              Redigera
+              Edit
             </button>
             <button
               type="button"
               onClick={() => onDelete(book)}
               className="rounded-lg border border-border px-2.5 py-1.5 text-sm font-medium text-danger transition hover:bg-danger-soft sm:border-0"
             >
-              Ta bort
+              Delete
             </button>
           </div>
         </li>

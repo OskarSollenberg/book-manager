@@ -22,7 +22,7 @@ export function Modal({ title, onClose, children }: ModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
-        aria-label="Stäng"
+        aria-label="Close"
         onClick={onClose}
         className="absolute inset-0 cursor-default bg-black/40 backdrop-blur-[2px]"
       />

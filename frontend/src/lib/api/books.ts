@@ -12,8 +12,8 @@ export class ApiError extends Error {
 }
 
 const FALLBACK_MESSAGES: Record<number, string> = {
-  400: "Ogiltig inmatning. Kontrollera fälten och försök igen.",
-  404: "Den här boken hittades inte. Den kan redan ha tagits bort.",
+  400: "Invalid input. Check the fields and try again.",
+  404: "This book was not found. It may already have been removed.",
 };
 
 interface ProblemDetails {
@@ -35,7 +35,7 @@ async function readErrorMessage(response: Response): Promise<string> {
     (fieldErrors.length > 0 ? fieldErrors.join("\n") : undefined) ??
     problem?.detail ??
     FALLBACK_MESSAGES[response.status] ??
-    `Något gick fel (${response.status}).`
+    `Something went wrong (${response.status}).`
   );
 }
 
@@ -49,7 +49,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
       ...init,
     });
   } catch {
-    throw new ApiError(0, "Kunde inte nå servern. Är API:t igång?");
+    throw new ApiError(0, "Could not reach the server. Is the API running?");
   }
 
   if (!response.ok) {

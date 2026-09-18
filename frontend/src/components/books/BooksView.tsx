@@ -42,7 +42,7 @@ export function BooksView({ initialBooks, loadError }: BooksViewProps) {
       await mutation();
       closeDialog();
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Något gick fel.");
+      setError(cause instanceof Error ? cause.message : "Something went wrong.");
     } finally {
       setIsPending(false);
     }
@@ -52,9 +52,10 @@ export function BooksView({ initialBooks, loadError }: BooksViewProps) {
     <main className="mx-auto min-h-screen max-w-3xl px-4 py-10 sm:px-6">
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="font-serif text-2xl font-semibold">Boklista</h1>
+          <h1 className="font-serif text-2xl font-semibold">Book list</h1>
           <p className="mt-1 text-sm text-text-secondary">
-            {books.length} {books.length === 1 ? "bok" : "böcker"} i samlingen
+            {books.length} {books.length === 1 ? "book" : "books"} in the
+            collection
           </p>
         </div>
 
@@ -62,7 +63,7 @@ export function BooksView({ initialBooks, loadError }: BooksViewProps) {
           onClick={() => setDialog({ kind: "create" })}
           className="w-full sm:w-auto"
         >
-          Lägg till bok
+          Add book
         </Button>
       </header>
 

@@ -38,6 +38,6 @@ public class BooksController(IBookService service) : ControllerBase
     private ObjectResult BookNotFound() =>
         Problem(
             statusCode: StatusCodes.Status404NotFound,
-            title: "Den här boken hittades inte.",
-            detail: "Den här boken hittades inte. Den kan redan ha tagits bort — ladda om sidan för att se den aktuella listan.");
+            title: "This book was not found.",
+            detail: "This book was not found. It may already have been removed — reload the page to see the current list.");
 }

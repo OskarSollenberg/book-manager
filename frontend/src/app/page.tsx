@@ -7,7 +7,7 @@ export default async function Home() {
     return <BooksView initialBooks={books} />;
   } catch (cause) {
     const message =
-      cause instanceof Error ? cause.message : "Kunde inte hämta böcker.";
+      cause instanceof Error ? cause.message : "Could not load books.";
 
     return <BooksView initialBooks={[]} loadError={message} />;
   }

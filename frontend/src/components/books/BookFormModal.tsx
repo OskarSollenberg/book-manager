@@ -23,8 +23,8 @@ interface BookFormModalProps {
 //
 // function validate({ title, author }: BookInput): Errors {
 //   const errors: Errors = {};
-//   if (!title.trim()) errors.title = "Titel är obligatoriskt.";
-//   if (!author.trim()) errors.author = "Författare är obligatoriskt.";
+//   if (!title.trim()) errors.title = "Title is required.";
+//   if (!author.trim()) errors.author = "Author is required.";
 //   return errors;
 // }
 
@@ -57,7 +57,7 @@ export function BookFormModal({
 
   return (
     <Modal
-      title={mode === "create" ? "Lägg till bok" : "Redigera bok"}
+      title={mode === "create" ? "Add book" : "Edit book"}
       onClose={onCancel}
     >
       <form onSubmit={handleSubmit} noValidate className="mt-5 flex flex-col gap-4">
@@ -65,10 +65,10 @@ export function BookFormModal({
 
         <TextField
           id="title"
-          label="Titel"
+          label="Title"
           required
           autoFocus
-          placeholder="t.ex. Doktor Glas"
+          placeholder="e.g. Doktor Glas"
           value={values.title}
           // error={errors.title}
           onChange={(event) => setField("title", event.target.value)}
@@ -76,9 +76,9 @@ export function BookFormModal({
 
         <TextField
           id="author"
-          label="Författare"
+          label="Author"
           required
-          placeholder="t.ex. Hjalmar Söderberg"
+          placeholder="e.g. Hjalmar Söderberg"
           value={values.author}
           // error={errors.author}
           onChange={(event) => setField("author", event.target.value)}
@@ -87,8 +87,8 @@ export function BookFormModal({
         <TextField
           id="publishedDate"
           type="date"
-          label="Publiceringsdatum"
-          hint="Valfritt."
+          label="Publication date"
+          hint="Optional."
           value={values.publishedDate ?? ""}
           onChange={(event) =>
             setField("publishedDate", event.target.value || null)
@@ -97,14 +97,14 @@ export function BookFormModal({
 
         <div className="mt-2 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button variant="secondary" onClick={onCancel} disabled={isSaving}>
-            Avbryt
+            Cancel
           </Button>
           <Button type="submit" disabled={isSaving}>
             {isSaving
-              ? "Sparar…"
+              ? "Saving…"
               : mode === "create"
-                ? "Lägg till"
-                : "Spara ändringar"}
+                ? "Add"
+                : "Save changes"}
           </Button>
         </div>
       </form>

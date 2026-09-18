@@ -21,11 +21,11 @@ export function ConfirmDeleteDialog({
   onCancel,
 }: ConfirmDeleteDialogProps) {
   return (
-    <Modal title="Ta bort bok" onClose={onCancel}>
+    <Modal title="Delete book" onClose={onCancel}>
       <p className="mt-3 text-sm text-text-secondary">
-        Är du säker på att du vill ta bort{" "}
-        <span className="font-medium text-text">{book.title}</span>? Det går
-        inte att ångra.
+        Are you sure you want to delete{" "}
+        <span className="font-medium text-text">{book.title}</span>? This cannot
+        be undone.
       </p>
 
       {serverError && (
@@ -36,10 +36,10 @@ export function ConfirmDeleteDialog({
 
       <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <Button variant="secondary" onClick={onCancel} disabled={isDeleting}>
-          Avbryt
+          Cancel
         </Button>
         <Button variant="danger" onClick={onConfirm} disabled={isDeleting}>
-          {isDeleting ? "Tar bort…" : "Ta bort"}
+          {isDeleting ? "Deleting…" : "Delete"}
         </Button>
       </div>
     </Modal>

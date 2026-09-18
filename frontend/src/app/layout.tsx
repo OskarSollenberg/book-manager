@@ -17,14 +17,14 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Boklistan",
-  description: "Hantera din boksamling",
+  title: "Book list",
+  description: "Manage your book collection",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="sv"
+      lang="en"
       className={`${fraunces.variable} ${ibmPlexSans.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">{children}</body>
